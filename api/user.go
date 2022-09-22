@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"github.com/gin-gonic/gin"
 	"github.com/lib/pq"
+	"github.com/rs/zerolog/log"
 	db "github.com/techschool/simplebank/db/sqlc"
 	"github.com/techschool/simplebank/util"
 	"net/http"
@@ -88,7 +89,10 @@ func (server *Server) loginUser(ctx *gin.Context) {
 	}
 
 	user, err := server.store.GetUser(ctx, req.Username)
+	log.Info().Msgf("UserName:", req.Username)
+	log.Info().Msgf("user %v", user)
 	if err != nil {
+		log.Error().Msg(err.Error())
 		if err == sql.ErrNoRows {
 			ctx.JSON(http.StatusNotFound, errorResponse(err))
 			return
