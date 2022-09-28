@@ -3,7 +3,7 @@ package db
 import (
 	"context"
 	"github.com/stretchr/testify/require"
-	"github.com/techschool/simplebank/util"
+	"github.com/tonyxone/simplebank/util"
 	"testing"
 	"time"
 )

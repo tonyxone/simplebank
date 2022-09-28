@@ -5,8 +5,8 @@ import (
 	"errors"
 	"github.com/gin-gonic/gin"
 	"github.com/lib/pq"
-	db "github.com/techschool/simplebank/db/sqlc"
-	"github.com/techschool/simplebank/token"
+	db "github.com/tonyxone/simplebank/db/sqlc"
+	"github.com/tonyxone/simplebank/token"
 	"net/http"
 )
 
