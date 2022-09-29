@@ -3,7 +3,7 @@ package token
 import (
 	"github.com/dgrijalva/jwt-go"
 	"github.com/stretchr/testify/require"
-	"github.com/techschool/simplebank/util"
+	"github.com/tonyxone/simplebank/util"
 	"testing"
 	"time"
 )

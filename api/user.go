@@ -2,11 +2,12 @@ package api
 
 import (
 	"database/sql"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/lib/pq"
 	"github.com/rs/zerolog/log"
-	db "github.com/techschool/simplebank/db/sqlc"
-	"github.com/techschool/simplebank/util"
+	db "github.com/tonyxone/simplebank/db/sqlc"
+	"github.com/tonyxone/simplebank/util"
 	"net/http"
 	"time"
 )
@@ -89,8 +90,8 @@ func (server *Server) loginUser(ctx *gin.Context) {
 	}
 
 	user, err := server.store.GetUser(ctx, req.Username)
-	log.Info().Msgf("UserName:", req.Username)
-	log.Info().Msgf("user %v", user)
+	fmt.Printf("UserName:", req.Username)
+	fmt.Printf("user %v", user)
 	if err != nil {
 		log.Error().Msg(err.Error())
 		if err == sql.ErrNoRows {
@@ -113,6 +114,21 @@ func (server *Server) loginUser(ctx *gin.Context) {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
 	}
+
+	//refreshToken, err := server.tokenMaker.CreateToken(
+	//	user.Username,
+	//	server.config.RefreshTokenDuration,
+	//)
+	//
+	//server.store.CreateSession(ctx, db.CreateSessionParams{
+	//	ID:           refreshPayload.ID,
+	//	Username:     user.Username,
+	//	RefreshToken: refreshToken,
+	//	UserAgent:    ctx.Request.UserAgent(),
+	//	ClientIp:     ctx.ClientIP(),
+	//	IsBlocked:    false,
+	//	ExpiresAt:    refreshPayload.ExpiredAt,
+	//})
 
 	rsp := loginUserResponse{
 		AccessToken: accessToken,
